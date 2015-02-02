@@ -14,6 +14,9 @@
 		144BEC3A1A7D890E00A66822 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 144BEC391A7D890E00A66822 /* Images.xcassets */; };
 		144BEC3D1A7D890E00A66822 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 144BEC3B1A7D890E00A66822 /* LaunchScreen.xib */; };
 		144BEC491A7D890E00A66822 /* TavoloTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 144BEC481A7D890E00A66822 /* TavoloTests.m */; };
+		14854D6A1A7F47F100121D24 /* TavoloLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 14854D691A7F47F100121D24 /* TavoloLabel.m */; };
+		14854D6F1A7F4B5B00121D24 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14854D6E1A7F4B5B00121D24 /* Roboto-Thin.ttf */; };
+		14854D711A7F4B6700121D24 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14854D701A7F4B6700121D24 /* Roboto-Medium.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +43,10 @@
 		144BEC421A7D890E00A66822 /* TavoloTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TavoloTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		144BEC471A7D890E00A66822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		144BEC481A7D890E00A66822 /* TavoloTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TavoloTests.m; sourceTree = "<group>"; };
+		14854D681A7F47F100121D24 /* TavoloLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TavoloLabel.h; sourceTree = "<group>"; };
+		14854D691A7F47F100121D24 /* TavoloLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TavoloLabel.m; sourceTree = "<group>"; };
+		14854D6E1A7F4B5B00121D24 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		14854D701A7F4B6700121D24 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,6 +95,7 @@
 				144BEC361A7D890E00A66822 /* Main.storyboard */,
 				144BEC391A7D890E00A66822 /* Images.xcassets */,
 				144BEC3B1A7D890E00A66822 /* LaunchScreen.xib */,
+				14854D6B1A7F47F400121D24 /* TavoloLabel */,
 				144BEC2C1A7D890E00A66822 /* Supporting Files */,
 			);
 			path = Tavolo;
@@ -96,6 +104,8 @@
 		144BEC2C1A7D890E00A66822 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				14854D701A7F4B6700121D24 /* Roboto-Medium.ttf */,
+				14854D6E1A7F4B5B00121D24 /* Roboto-Thin.ttf */,
 				144BEC2D1A7D890E00A66822 /* Info.plist */,
 				144BEC2E1A7D890E00A66822 /* main.m */,
 			);
@@ -117,6 +127,15 @@
 				144BEC471A7D890E00A66822 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		14854D6B1A7F47F400121D24 /* TavoloLabel */ = {
+			isa = PBXGroup;
+			children = (
+				14854D681A7F47F100121D24 /* TavoloLabel.h */,
+				14854D691A7F47F100121D24 /* TavoloLabel.m */,
+			);
+			name = TavoloLabel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -199,8 +218,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14854D711A7F4B6700121D24 /* Roboto-Medium.ttf in Resources */,
 				144BEC381A7D890E00A66822 /* Main.storyboard in Resources */,
 				144BEC3D1A7D890E00A66822 /* LaunchScreen.xib in Resources */,
+				14854D6F1A7F4B5B00121D24 /* Roboto-Thin.ttf in Resources */,
 				144BEC3A1A7D890E00A66822 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -220,6 +241,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				144BEC351A7D890E00A66822 /* ViewController.m in Sources */,
+				14854D6A1A7F47F100121D24 /* TavoloLabel.m in Sources */,
 				144BEC321A7D890E00A66822 /* AppDelegate.m in Sources */,
 				144BEC2F1A7D890E00A66822 /* main.m in Sources */,
 			);
