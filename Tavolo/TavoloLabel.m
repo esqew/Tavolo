@@ -14,12 +14,12 @@
     [super awakeFromNib];
     if ([self.text isEqualToString:@"TAVOLO.IO"]) {
         UIFont *medium = [UIFont fontWithName:@"Roboto-Medium" size:self.font.pointSize];
-        NSDictionary *dict1 = [NSDictionary dictionaryWithObject:medium forKey:NSFontAttributeName];
-        NSMutableAttributedString *prepend = [[NSMutableAttributedString alloc] initWithString:@"TAVOLO" attributes:dict1];
+        NSDictionary *mediumDict = [NSDictionary dictionaryWithObject:medium forKey:NSFontAttributeName];
+        NSMutableAttributedString *prepend = [[NSMutableAttributedString alloc] initWithString:@"TAVOLO" attributes:mediumDict];
         
         UIFont *light = [UIFont fontWithName:@"Roboto-Thin" size:self.font.pointSize];
-        NSDictionary *dict2 = [NSDictionary dictionaryWithObject:light forKey:NSFontAttributeName];
-        NSMutableAttributedString *append = [[NSMutableAttributedString alloc] initWithString:@".IO" attributes:dict2];
+        NSDictionary *lightDict = [NSDictionary dictionaryWithObject:light forKey:NSFontAttributeName];
+        NSMutableAttributedString *append = [[NSMutableAttributedString alloc] initWithString:@".IO" attributes:lightDict];
         
         [prepend appendAttributedString:append];
         
@@ -28,7 +28,6 @@
     else {
         self.font = [UIFont fontWithName:@"Roboto-Medium" size:self.font.pointSize];
     }
-    NSLog(@"%@", self.font.fontName);
 }
 
 /*
