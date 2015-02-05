@@ -7,6 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "TavoloLoginViewController.h"
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 
 @interface ViewController ()
 
@@ -26,6 +29,17 @@
     // hack to ensure status bar stays visible when transitioning to landscape
     [[UIApplication sharedApplication] setStatusBarHidden:YES withAnimation:UIStatusBarAnimationNone];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    // if there's no user in the local parse cache, prompt the user to log in
+    if (![PFUser currentUser]) {
+        TavoloLoginViewController *loginViewController = [[TavoloLoginViewController alloc] init];
+        //loginViewController.delegate = self;
+        [self presentViewController:loginViewController animated:YES completion:nil];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {

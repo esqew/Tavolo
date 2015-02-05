@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 
 @interface AppDelegate ()
 
@@ -21,7 +23,31 @@
     // set over-arching status bar style
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
+    // set parse api keys
+    [Parse setApplicationId:@"SiHHF92GOqSOmsfyDBqFHsFf6xH7VMyvW0dfaH6Y" clientKey:@"ElCJOVE6WpAddqArzeRBMrYhOGBxYkk29Vahdb5Y"];
+    
+    // register for push notifications (provided by parse)
+    UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
+                                                    UIUserNotificationTypeBadge |
+                                                    UIUserNotificationTypeSound);
+    UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:userNotificationTypes categories:nil];
+    
+    [application registerUserNotificationSettings:settings];
+    [application registerForRemoteNotifications];
+    
     return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    // store the devicetoken in the current installation and save it to Parse
+    PFInstallation *currentInstallation = [PFInstallation currentInstallation];
+    [currentInstallation setDeviceTokenFromData:deviceToken];
+    [currentInstallation saveInBackground];
+    // TODO: add .p12 authorization (?) files from Apple after registering app id and enabling push notifications
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    [PFPush handlePush:userInfo];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

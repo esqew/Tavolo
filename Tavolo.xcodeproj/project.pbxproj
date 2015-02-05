@@ -29,6 +29,10 @@
 		145609241A81865A00FCF7ED /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 145609231A81865A00FCF7ED /* SystemConfiguration.framework */; };
 		145609261A81866300FCF7ED /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 145609251A81866300FCF7ED /* libz.dylib */; };
 		145609281A81866B00FCF7ED /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 145609271A81866B00FCF7ED /* libsqlite3.dylib */; };
+		1483DFCB1A841DBC00D1E894 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1483DFCA1A841DBC00D1E894 /* Social.framework */; };
+		1483DFCD1A841DC000D1E894 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1483DFCC1A841DC000D1E894 /* Accounts.framework */; };
+		1483DFD01A841F7E00D1E894 /* TavoloLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 1483DFCF1A841F7E00D1E894 /* TavoloLoginViewController.m */; };
+		1483DFD71A84206C00D1E894 /* UIColor+TavoloColor.m in Sources */ = {isa = PBXBuildFile; fileRef = 1483DFD61A84206C00D1E894 /* UIColor+TavoloColor.m */; };
 		14854D6A1A7F47F100121D24 /* TavoloLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = 14854D691A7F47F100121D24 /* TavoloLabel.m */; };
 		14854D6F1A7F4B5B00121D24 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14854D6E1A7F4B5B00121D24 /* Roboto-Thin.ttf */; };
 		14854D711A7F4B6700121D24 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14854D701A7F4B6700121D24 /* Roboto-Medium.ttf */; };
@@ -73,6 +77,12 @@
 		145609231A81865A00FCF7ED /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		145609251A81866300FCF7ED /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		145609271A81866B00FCF7ED /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		1483DFCA1A841DBC00D1E894 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
+		1483DFCC1A841DC000D1E894 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
+		1483DFCE1A841F7E00D1E894 /* TavoloLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TavoloLoginViewController.h; path = Tavolo/TavoloLoginViewController.h; sourceTree = "<group>"; };
+		1483DFCF1A841F7E00D1E894 /* TavoloLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TavoloLoginViewController.m; path = Tavolo/TavoloLoginViewController.m; sourceTree = "<group>"; };
+		1483DFD51A84206C00D1E894 /* UIColor+TavoloColor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+TavoloColor.h"; path = "Tavolo/UIColor+TavoloColor.h"; sourceTree = "<group>"; };
+		1483DFD61A84206C00D1E894 /* UIColor+TavoloColor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+TavoloColor.m"; path = "Tavolo/UIColor+TavoloColor.m"; sourceTree = "<group>"; };
 		14854D681A7F47F100121D24 /* TavoloLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TavoloLabel.h; sourceTree = "<group>"; };
 		14854D691A7F47F100121D24 /* TavoloLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TavoloLabel.m; sourceTree = "<group>"; };
 		14854D6E1A7F4B5B00121D24 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
@@ -84,6 +94,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1483DFCD1A841DC000D1E894 /* Accounts.framework in Frameworks */,
+				1483DFCB1A841DBC00D1E894 /* Social.framework in Frameworks */,
 				145609281A81866B00FCF7ED /* libsqlite3.dylib in Frameworks */,
 				145609261A81866300FCF7ED /* libz.dylib in Frameworks */,
 				145609241A81865A00FCF7ED /* SystemConfiguration.framework in Frameworks */,
@@ -135,6 +147,8 @@
 			children = (
 				1456092B1A81869500FCF7ED /* AppDelegate */,
 				14854D6B1A7F47F400121D24 /* TavoloLabel */,
+				1483DFD11A841F8300D1E894 /* TavoloLoginViewController */,
+				1483DFD81A84207000D1E894 /* UIColor+TavoloColor */,
 				1456092C1A8186A100FCF7ED /* ViewController (main) */,
 				144BEC361A7D890E00A66822 /* Main.storyboard */,
 				144BEC391A7D890E00A66822 /* Images.xcassets */,
@@ -148,8 +162,7 @@
 		144BEC2C1A7D890E00A66822 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				14854D701A7F4B6700121D24 /* Roboto-Medium.ttf */,
-				14854D6E1A7F4B5B00121D24 /* Roboto-Thin.ttf */,
+				1483DFD91A84294A00D1E894 /* Fonts */,
 				144BEC2D1A7D890E00A66822 /* Info.plist */,
 				144BEC2E1A7D890E00A66822 /* main.m */,
 			);
@@ -187,6 +200,8 @@
 		145609291A81867300FCF7ED /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				1483DFCC1A841DC000D1E894 /* Accounts.framework */,
+				1483DFCA1A841DBC00D1E894 /* Social.framework */,
 				145609271A81866B00FCF7ED /* libsqlite3.dylib */,
 				145609251A81866300FCF7ED /* libz.dylib */,
 				145609231A81865A00FCF7ED /* SystemConfiguration.framework */,
@@ -228,6 +243,35 @@
 				144BEC341A7D890E00A66822 /* ViewController.m */,
 			);
 			name = "ViewController (main)";
+			sourceTree = "<group>";
+		};
+		1483DFD11A841F8300D1E894 /* TavoloLoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				1483DFCE1A841F7E00D1E894 /* TavoloLoginViewController.h */,
+				1483DFCF1A841F7E00D1E894 /* TavoloLoginViewController.m */,
+			);
+			name = TavoloLoginViewController;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		1483DFD81A84207000D1E894 /* UIColor+TavoloColor */ = {
+			isa = PBXGroup;
+			children = (
+				1483DFD51A84206C00D1E894 /* UIColor+TavoloColor.h */,
+				1483DFD61A84206C00D1E894 /* UIColor+TavoloColor.m */,
+			);
+			name = "UIColor+TavoloColor";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		1483DFD91A84294A00D1E894 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				14854D701A7F4B6700121D24 /* Roboto-Medium.ttf */,
+				14854D6E1A7F4B5B00121D24 /* Roboto-Thin.ttf */,
+			);
+			name = Fonts;
 			sourceTree = "<group>";
 		};
 		14854D6B1A7F47F400121D24 /* TavoloLabel */ = {
@@ -345,6 +389,8 @@
 				14854D6A1A7F47F100121D24 /* TavoloLabel.m in Sources */,
 				144BEC321A7D890E00A66822 /* AppDelegate.m in Sources */,
 				144BEC2F1A7D890E00A66822 /* main.m in Sources */,
+				1483DFD71A84206C00D1E894 /* UIColor+TavoloColor.m in Sources */,
+				1483DFD01A841F7E00D1E894 /* TavoloLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
