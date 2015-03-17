@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
@@ -17,18 +17,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TAVOLO.IO" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zsl-y2-RXV" customClass="TavoloLabel">
-                                <rect key="frame" x="0.0" y="23" width="600" height="59.5"/>
+                                <rect key="frame" x="0.0" y="23" width="600" height="60"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="51"/>
                                 <color key="textColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N8x-Bl-Pxy">
+                                <rect key="frame" x="243" y="550" width="115" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="115" id="o3S-zw-EQg"/>
+                                </constraints>
+                                <state key="normal" title="Log Out"/>
+                                <connections>
+                                    <action selector="logOut:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7Vm-Nx-r55"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Show this PIN to your server:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RVE-g4-4WF">
+                                <rect key="frame" x="16" y="105" width="137" height="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" red="0.20000000000000001" green="0.0039215686274509803" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="RVE-g4-4WF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="16" id="4GB-T2-UwH"/>
                             <constraint firstAttribute="trailing" secondItem="zsl-y2-RXV" secondAttribute="trailing" id="4UH-Zd-NpS"/>
+                            <constraint firstItem="RVE-g4-4WF" firstAttribute="top" secondItem="zsl-y2-RXV" secondAttribute="bottom" constant="22" id="6NQ-bF-wjj"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" relation="lessThanOrEqual" secondItem="zsl-y2-RXV" secondAttribute="bottom" constant="517" id="7e3-9Z-rtJ"/>
                             <constraint firstItem="zsl-y2-RXV" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="3" id="GhD-jt-I6c"/>
+                            <constraint firstAttribute="bottom" secondItem="N8x-Bl-Pxy" secondAttribute="bottom" constant="20" id="NYq-Fs-fdV"/>
                             <constraint firstItem="zsl-y2-RXV" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="cFk-0b-qKj"/>
+                            <constraint firstItem="N8x-Bl-Pxy" firstAttribute="centerX" secondItem="zsl-y2-RXV" secondAttribute="centerX" id="ijZ-2g-PlM"/>
                             <constraint firstItem="zsl-y2-RXV" firstAttribute="top" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="28" id="uL5-NZ-XP1"/>
                         </constraints>
                     </view>

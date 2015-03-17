@@ -17,6 +17,19 @@
 
 @implementation ViewController
 
+#pragma mark - Methods
+
+- (IBAction)logOut:(id)sender {
+    // provide a method to log out from the ib ui
+    [PFUser logOut];
+    if (![PFUser currentUser]) {
+        TavoloLoginViewController *loginViewController = [[TavoloLoginViewController alloc] init];
+        [self presentViewController:loginViewController animated:YES completion:nil];
+    }
+}
+
+#pragma mark - Class method implementations
+
 - (NSUInteger)supportedInterfaceOrientations {
     // support all user interfaces to the best of our ability, as per Apple Human Interface Guidelines
     return UIInterfaceOrientationMaskAll;
@@ -37,7 +50,6 @@
     // if there's no user in the local parse cache, prompt the user to log in
     if (![PFUser currentUser]) {
         TavoloLoginViewController *loginViewController = [[TavoloLoginViewController alloc] init];
-        //loginViewController.delegate = self;
         [self presentViewController:loginViewController animated:YES completion:nil];
     }
 }

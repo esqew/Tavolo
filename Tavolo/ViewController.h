@@ -10,6 +10,7 @@
 
 @interface ViewController : UIViewController
 
+- (IBAction)logOut:(id)sender;
 
 @end
 

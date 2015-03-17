@@ -8,6 +8,6 @@
 
 #import <ParseUI/ParseUI.h>
 
-@interface TavoloLoginViewController : PFLogInViewController
+@interface TavoloLoginViewController : PFLogInViewController <PFLogInViewControllerDelegate>
 
 @end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		141222861A98381600C61EEE /* TavoloSignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 141222851A98381600C61EEE /* TavoloSignupViewController.m */; };
 		144BEC2F1A7D890E00A66822 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 144BEC2E1A7D890E00A66822 /* main.m */; };
 		144BEC321A7D890E00A66822 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 144BEC311A7D890E00A66822 /* AppDelegate.m */; };
 		144BEC351A7D890E00A66822 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 144BEC341A7D890E00A66822 /* ViewController.m */; };
@@ -49,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		141222841A98381600C61EEE /* TavoloSignupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TavoloSignupViewController.h; path = Tavolo/TavoloSignupViewController.h; sourceTree = "<group>"; };
+		141222851A98381600C61EEE /* TavoloSignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TavoloSignupViewController.m; path = Tavolo/TavoloSignupViewController.m; sourceTree = "<group>"; };
 		144BEC291A7D890E00A66822 /* Tavolo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tavolo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		144BEC2D1A7D890E00A66822 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		144BEC2E1A7D890E00A66822 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -124,6 +127,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		141222871A98381A00C61EEE /* TavoloSignupViewController */ = {
+			isa = PBXGroup;
+			children = (
+				141222841A98381600C61EEE /* TavoloSignupViewController.h */,
+				141222851A98381600C61EEE /* TavoloSignupViewController.m */,
+			);
+			name = TavoloSignupViewController;
+			path = ..;
+			sourceTree = "<group>";
+		};
 		144BEC201A7D890E00A66822 = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +161,7 @@
 				1456092B1A81869500FCF7ED /* AppDelegate */,
 				14854D6B1A7F47F400121D24 /* TavoloLabel */,
 				1483DFD11A841F8300D1E894 /* TavoloLoginViewController */,
+				141222871A98381A00C61EEE /* TavoloSignupViewController */,
 				1483DFD81A84207000D1E894 /* UIColor+TavoloColor */,
 				1456092C1A8186A100FCF7ED /* ViewController (main) */,
 				144BEC361A7D890E00A66822 /* Main.storyboard */,
@@ -390,6 +404,7 @@
 				144BEC321A7D890E00A66822 /* AppDelegate.m in Sources */,
 				144BEC2F1A7D890E00A66822 /* main.m in Sources */,
 				1483DFD71A84206C00D1E894 /* UIColor+TavoloColor.m in Sources */,
+				141222861A98381600C61EEE /* TavoloSignupViewController.m in Sources */,
 				1483DFD01A841F7E00D1E894 /* TavoloLoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -516,7 +531,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/sean/Downloads/parse-library-1.6.2",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Tavolo/Info.plist;
@@ -531,7 +545,6 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"/Users/sean/Downloads/parse-library-1.6.2",
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Tavolo/Info.plist;

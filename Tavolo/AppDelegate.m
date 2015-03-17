@@ -24,7 +24,8 @@
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     // set parse api keys
-    [Parse setApplicationId:@"SiHHF92GOqSOmsfyDBqFHsFf6xH7VMyvW0dfaH6Y" clientKey:@"ElCJOVE6WpAddqArzeRBMrYhOGBxYkk29Vahdb5Y"];
+    [Parse setApplicationId:@"SiHHF92GOqSOmsfyDBqFHsFf6xH7VMyvW0dfaH6Y"
+                  clientKey:@"ElCJOVE6WpAddqArzeRBMrYhOGBxYkk29Vahdb5Y"];
     
     // register for push notifications (provided by parse)
     UIUserNotificationType userNotificationTypes = (UIUserNotificationTypeAlert |
@@ -34,6 +35,9 @@
     
     [application registerUserNotificationSettings:settings];
     [application registerForRemoteNotifications];
+    
+    // analytics
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     return YES;
 }
