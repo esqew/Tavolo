@@ -39,7 +39,6 @@
 		14854D711A7F4B6700121D24 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14854D701A7F4B6700121D24 /* Roboto-Medium.ttf */; };
 		EED122A71AC7A1DB00DE7B42 /* HostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED122A61AC7A1DB00DE7B42 /* HostViewController.m */; };
 		EED122AC1AD2252600DE7B42 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED122AB1AD2252600DE7B42 /* SettingsViewController.m */; };
-		EED122AF1AD225ED00DE7B42 /* WaitViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED122AE1AD225ED00DE7B42 /* WaitViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,8 +96,6 @@
 		EED122A61AC7A1DB00DE7B42 /* HostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostViewController.m; sourceTree = "<group>"; };
 		EED122AA1AD2252600DE7B42 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		EED122AB1AD2252600DE7B42 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		EED122AD1AD225ED00DE7B42 /* WaitViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitViewController.h; sourceTree = "<group>"; };
-		EED122AE1AD225ED00DE7B42 /* WaitViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -174,8 +171,6 @@
 				1483DFD81A84207000D1E894 /* UIColor+TavoloColor */,
 				1456092C1A8186A100FCF7ED /* ViewController (main) */,
 				144BEC361A7D890E00A66822 /* Main.storyboard */,
-				EED122AD1AD225ED00DE7B42 /* WaitViewController.h */,
-				EED122AE1AD225ED00DE7B42 /* WaitViewController.m */,
 				EED122AA1AD2252600DE7B42 /* SettingsViewController.h */,
 				EED122AB1AD2252600DE7B42 /* SettingsViewController.m */,
 				EED122A51AC7A1DB00DE7B42 /* HostViewController.h */,
@@ -415,7 +410,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				144BEC351A7D890E00A66822 /* ViewController.m in Sources */,
-				EED122AF1AD225ED00DE7B42 /* WaitViewController.m in Sources */,
 				14854D6A1A7F47F100121D24 /* TavoloLabel.m in Sources */,
 				144BEC321A7D890E00A66822 /* AppDelegate.m in Sources */,
 				EED122AC1AD2252600DE7B42 /* SettingsViewController.m in Sources */,
