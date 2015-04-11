@@ -88,6 +88,7 @@
                         <viewControllerLayoutGuide type="bottom" id="sqz-Rt-Aua"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="ewV-ne-IkY">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Restaurant Settings" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EPy-Wp-Y8g">
@@ -231,6 +232,7 @@
                         <viewControllerLayoutGuide type="bottom" id="qEf-O5-gP8"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gvr-QP-KHr">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hostess Input Page" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cGE-ES-i32">
@@ -347,8 +349,8 @@
                     </tabBar>
                     <connections>
                         <segue destination="FgD-NU-Rpq" kind="relationship" relationship="viewControllers" id="axU-wh-OhZ"/>
+                        <segue destination="MDf-IS-EOI" kind="relationship" relationship="viewControllers" id="R7f-Tb-93b"/>
                         <segue destination="Fpv-4o-1Yc" kind="relationship" relationship="viewControllers" id="ApL-jI-dF9"/>
-                        <segue destination="xyI-Ft-poU" kind="relationship" relationship="viewControllers" id="Kbx-Lh-Soa"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SbU-8v-tlk" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -356,28 +358,11 @@
             <point key="canvasLocation" x="1398" y="64"/>
         </scene>
         <!--Wait Queue-->
-        <scene sceneID="Grr-u0-pGg">
-            <objects>
-                <viewController storyboardIdentifier="Queue" id="xyI-Ft-poU" customClass="WaitViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="XTf-eS-z7a"/>
-                        <viewControllerLayoutGuide type="bottom" id="Np6-eQ-B1e"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="pOG-Oz-THh">
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Wait Queue" id="A50-r0-Qz4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="cff-Xz-KMv" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2430" y="1191"/>
-        </scene>
-        <!--Table View Controller-->
         <scene sceneID="C7t-4k-Pod">
             <objects>
                 <tableViewController id="MDf-IS-EOI" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="kLn-hy-3x3">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -393,10 +378,11 @@
                             <outlet property="delegate" destination="MDf-IS-EOI" id="XQP-9K-ldv"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="Wait Queue" id="YWT-Ku-8kZ"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UGr-1i-VwY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3046.5" y="1191"/>
+            <point key="canvasLocation" x="2430" y="1204"/>
         </scene>
     </scenes>
 </document>
