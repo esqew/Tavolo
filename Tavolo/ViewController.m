@@ -51,6 +51,13 @@
     if (![PFUser currentUser]) {
         TavoloLoginViewController *loginViewController = [[TavoloLoginViewController alloc] init];
         [self presentViewController:loginViewController animated:YES completion:nil];
+    } else {
+        // if this is a restaurant account, move them directly to the hostess view
+        [[PFUser currentUser] fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            if ([[object objectForKey:@"type"] isEqualToString:@"restaurant"]) {
+                [self performSegueWithIdentifier:@"restaurantView" sender:nil];
+            }
+        }];
     }
 }
 

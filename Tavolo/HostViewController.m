@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Tavolo Team. All rights reserved.
 //
 
+#import <Parse/Parse.h>
 #import "HostViewController.h"
 
 @interface HostViewController ()
@@ -19,6 +20,26 @@
 
  
     // Do any additional setup after loading the view.
+    
+    pinField.delegate = self;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    if (textField == pinField) {
+        // find name of user with a specific pin assigned to them
+        PFQuery *pinQuery = [PFUser query];
+        [pinQuery whereKey:@"pin" equalTo:[NSNumber numberWithInt:[pinField.text intValue]]];
+        [pinQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            if (objects.count != 1) {
+                
+            } else {
+                nameField.text = ((NSString *)[((PFUser *)[objects objectAtIndex:0]) objectForKey:@"additional"]);
+            }
+        }];
+    }
+    
+    return YES;
+
 }
 
 - (void)didReceiveMemoryWarning {

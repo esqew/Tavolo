@@ -6,7 +6,10 @@
 //  Copyright (c) 2015 Tavolo Team. All rights reserved.
 //
 
+#import <Parse/Parse.h>
 #import "TavoloSignupViewController.h"
+#import "UIColor+TavoloColor.h"
+#import "TavoloLabel.h"
 
 @interface TavoloSignupViewController ()
 
@@ -18,7 +21,34 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     // h/t to https://www.parse.com/tutorials/login-and-signup-views
+    
     self.delegate = self;
+    
+    [self.signUpView setBackgroundColor:[UIColor tavoloColor]];
+    
+    [self.signUpView setEmailAsUsername:YES];
+    [self.signUpView.additionalField setPlaceholder:@"Full name"];
+    [self.signUpView.additionalField setSeparatorStyle:PFTextFieldSeparatorStyleTop|PFTextFieldSeparatorStyleBottom];
+    
+    TavoloLabel *titleLabel = [[TavoloLabel alloc] init];
+    [titleLabel setText:@"TAVOLO Signup"];
+    [titleLabel setTextColor:[UIColor whiteColor]];
+    [titleLabel setFont:[UIFont fontWithName:@"Roboto-Thin" size:40.0]];
+    
+    [self.signUpView setLogo:titleLabel];
+    [self.signUpView.logo awakeFromNib];
+    
+    [self.signUpView.dismissButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+}
+
+- (void)signUpViewController:(PFSignUpViewController *)signUpController didSignUpUser:(PFUser *)user {
+    [user setObject:@"user" forKey:@"type"];
+    [user save];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    [self.signUpView.emailField becomeFirstResponder];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -8,5 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HostViewController : UIViewController
+@interface HostViewController : UIViewController <UITextFieldDelegate> {
+    IBOutlet UITextField *pinField;
+    IBOutlet UITextField *nameField;
+}
 @end

@@ -95,8 +95,8 @@
 		14854D691A7F47F100121D24 /* TavoloLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TavoloLabel.m; sourceTree = "<group>"; };
 		14854D6E1A7F4B5B00121D24 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		14854D701A7F4B6700121D24 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
-		EE32A0931AD972A20056BA25 /* RestaurantTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RestaurantTableController.h; path = ../RestaurantTableController.h; sourceTree = "<group>"; };
-		EE32A0941AD972A20056BA25 /* RestaurantTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RestaurantTableController.m; path = ../RestaurantTableController.m; sourceTree = "<group>"; };
+		EE32A0931AD972A20056BA25 /* RestaurantTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantTableController.h; sourceTree = "<group>"; };
+		EE32A0941AD972A20056BA25 /* RestaurantTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantTableController.m; sourceTree = "<group>"; };
 		EE32A0961AD974D10056BA25 /* RestaurantCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantCell.h; sourceTree = "<group>"; };
 		EE32A0971AD974D10056BA25 /* RestaurantCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantCell.m; sourceTree = "<group>"; };
 		EE32A0991AD975C20056BA25 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
@@ -180,12 +180,11 @@
 				1483DFD81A84207000D1E894 /* UIColor+TavoloColor */,
 				1456092C1A8186A100FCF7ED /* ViewController (main) */,
 				144BEC361A7D890E00A66822 /* Main.storyboard */,
-				EE32A0961AD974D10056BA25 /* RestaurantCell.h */,
-				EE32A0971AD974D10056BA25 /* RestaurantCell.m */,
+				1469AED71ADA0B03006D52BB /* RestaurantCell */,
 				EED122AA1AD2252600DE7B42 /* SettingsViewController.h */,
+				EED122AB1AD2252600DE7B42 /* SettingsViewController.m */,
 				EE32A0931AD972A20056BA25 /* RestaurantTableController.h */,
 				EE32A0941AD972A20056BA25 /* RestaurantTableController.m */,
-				EED122AB1AD2252600DE7B42 /* SettingsViewController.m */,
 				EED122A51AC7A1DB00DE7B42 /* HostViewController.h */,
 				EED122A61AC7A1DB00DE7B42 /* HostViewController.m */,
 				EE32A0991AD975C20056BA25 /* Customer.m */,
@@ -282,6 +281,15 @@
 				144BEC341A7D890E00A66822 /* ViewController.m */,
 			);
 			name = "ViewController (main)";
+			sourceTree = "<group>";
+		};
+		1469AED71ADA0B03006D52BB /* RestaurantCell */ = {
+			isa = PBXGroup;
+			children = (
+				EE32A0961AD974D10056BA25 /* RestaurantCell.h */,
+				EE32A0971AD974D10056BA25 /* RestaurantCell.m */,
+			);
+			name = RestaurantCell;
 			sourceTree = "<group>";
 		};
 		1483DFD11A841F8300D1E894 /* TavoloLoginViewController */ = {

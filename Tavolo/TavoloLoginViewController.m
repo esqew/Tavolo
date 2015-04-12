@@ -10,6 +10,7 @@
 
 #import <Parse/Parse.h>
 #import "TavoloLoginViewController.h"
+#import "TavoloSignupViewController.h"
 #import "UIColor+TavoloColor.h"
 #import "TavoloLabel.h"
 
@@ -45,8 +46,16 @@
 
     [self.logInView.signUpButton setBackgroundImage:nil forState:UIControlStateNormal];
     [self.logInView.signUpButton setBackgroundColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.0]];
+    [self.logInView.signUpButton removeTarget:nil action:nil forControlEvents:UIControlEventAllEvents];
+    [self.logInView.signUpButton addTarget:self action:@selector(showSignupForm:) forControlEvents:UIControlEventAllEvents];
     
     [self.logInView.usernameField becomeFirstResponder];
+}
+
+- (void)showSignupForm:(id)sender {
+    TavoloSignupViewController *signupViewController = [[TavoloSignupViewController alloc] init];
+    [signupViewController setFields:PFSignUpFieldsDefault|PFSignUpFieldsAdditional];
+    [self presentViewController:signupViewController animated:YES completion:nil];
 }
 
 #pragma mark - PFLogInViewControllerDelegate Protocol Implementation
