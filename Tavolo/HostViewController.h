@@ -12,4 +12,7 @@
     IBOutlet UITextField *pinField;
     IBOutlet UITextField *nameField;
 }
+
+- (IBAction)addToQueue:(id)sender;
+
 @end

@@ -56,6 +56,10 @@
         [[PFUser currentUser] fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             if ([[object objectForKey:@"type"] isEqualToString:@"restaurant"]) {
                 [self performSegueWithIdentifier:@"restaurantView" sender:nil];
+            } else {
+                [PFCloud callFunctionInBackground:@"generatePIN" withParameters:@{} block:^(id object, NSError *error) {
+                    NSLog(@"%@, (class: %@)", object, [object class]);
+                }];
             }
         }];
     }
