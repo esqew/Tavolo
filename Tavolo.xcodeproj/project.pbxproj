@@ -39,10 +39,10 @@
 		14854D711A7F4B6700121D24 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 14854D701A7F4B6700121D24 /* Roboto-Medium.ttf */; };
 		D98802061ADCABE1003C8EC5 /* PinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D98802051ADCABE1003C8EC5 /* PinViewController.m */; };
 		D98802091ADCAD4F003C8EC5 /* WaitScreenViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D98802081ADCAD4F003C8EC5 /* WaitScreenViewController.m */; };
-		D988020C1ADD61B6003C8EC5 /* DropDownView.m in Sources */ = {isa = PBXBuildFile; fileRef = D988020B1ADD61B6003C8EC5 /* DropDownView.m */; };
 		D988020F1ADD6789003C8EC5 /* Down4-50.png in Resources */ = {isa = PBXBuildFile; fileRef = D988020E1ADD6789003C8EC5 /* Down4-50.png */; };
 		D98802121ADD7623003C8EC5 /* Up4-50.png in Resources */ = {isa = PBXBuildFile; fileRef = D98802111ADD7623003C8EC5 /* Up4-50.png */; };
 		D98802141ADD795C003C8EC5 /* cheesecake-factory.jpg in Resources */ = {isa = PBXBuildFile; fileRef = D98802131ADD795C003C8EC5 /* cheesecake-factory.jpg */; };
+		D98802171ADDA1FA003C8EC5 /* DropDownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D98802161ADDA1FA003C8EC5 /* DropDownViewController.m */; };
 		EE32A0951AD972A20056BA25 /* RestaurantTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE32A0941AD972A20056BA25 /* RestaurantTableController.m */; };
 		EE32A0981AD974D10056BA25 /* RestaurantCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE32A0971AD974D10056BA25 /* RestaurantCell.m */; };
 		EE32A09B1AD975C20056BA25 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = EE32A0991AD975C20056BA25 /* Customer.m */; };
@@ -105,11 +105,11 @@
 		D98802051ADCABE1003C8EC5 /* PinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinViewController.m; sourceTree = "<group>"; };
 		D98802071ADCAD4F003C8EC5 /* WaitScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitScreenViewController.h; sourceTree = "<group>"; };
 		D98802081ADCAD4F003C8EC5 /* WaitScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitScreenViewController.m; sourceTree = "<group>"; };
-		D988020A1ADD61B6003C8EC5 /* DropDownView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DropDownView.h; path = "../../../dropdowndemo 3/Classes/DropDownView.h"; sourceTree = "<group>"; };
-		D988020B1ADD61B6003C8EC5 /* DropDownView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DropDownView.m; path = "../../../dropdowndemo 3/Classes/DropDownView.m"; sourceTree = "<group>"; };
 		D988020E1ADD6789003C8EC5 /* Down4-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Down4-50.png"; path = "../../../Down4-50.png"; sourceTree = "<group>"; };
 		D98802111ADD7623003C8EC5 /* Up4-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Up4-50.png"; path = "../../../Up4-50.png"; sourceTree = "<group>"; };
 		D98802131ADD795C003C8EC5 /* cheesecake-factory.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = "cheesecake-factory.jpg"; path = "../../../cheesecake-factory.jpg"; sourceTree = "<group>"; };
+		D98802151ADDA1FA003C8EC5 /* DropDownViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownViewController.h; sourceTree = "<group>"; };
+		D98802161ADDA1FA003C8EC5 /* DropDownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownViewController.m; sourceTree = "<group>"; };
 		EE32A0931AD972A20056BA25 /* RestaurantTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantTableController.h; sourceTree = "<group>"; };
 		EE32A0941AD972A20056BA25 /* RestaurantTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantTableController.m; sourceTree = "<group>"; };
 		EE32A0961AD974D10056BA25 /* RestaurantCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RestaurantCell.h; sourceTree = "<group>"; };
@@ -350,8 +350,8 @@
 			isa = PBXGroup;
 			children = (
 				D98802101ADD679A003C8EC5 /* Resources */,
-				D988020A1ADD61B6003C8EC5 /* DropDownView.h */,
-				D988020B1ADD61B6003C8EC5 /* DropDownView.m */,
+				D98802151ADDA1FA003C8EC5 /* DropDownViewController.h */,
+				D98802161ADDA1FA003C8EC5 /* DropDownViewController.m */,
 				D98802051ADCABE1003C8EC5 /* PinViewController.m */,
 				D98802041ADCABE1003C8EC5 /* PinViewController.h */,
 				D98802081ADCAD4F003C8EC5 /* WaitScreenViewController.m */,
@@ -485,11 +485,11 @@
 				EE32A0951AD972A20056BA25 /* RestaurantTableController.m in Sources */,
 				EE32A09B1AD975C20056BA25 /* Customer.m in Sources */,
 				D98802091ADCAD4F003C8EC5 /* WaitScreenViewController.m in Sources */,
-				D988020C1ADD61B6003C8EC5 /* DropDownView.m in Sources */,
 				EED122A71AC7A1DB00DE7B42 /* HostViewController.m in Sources */,
 				1483DFD71A84206C00D1E894 /* UIColor+TavoloColor.m in Sources */,
 				141222861A98381600C61EEE /* TavoloSignupViewController.m in Sources */,
 				1483DFD01A841F7E00D1E894 /* TavoloLoginViewController.m in Sources */,
+				D98802171ADDA1FA003C8EC5 /* DropDownViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

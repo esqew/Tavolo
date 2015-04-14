@@ -33,9 +33,9 @@
     //Set up Drop Down View
     _arrayData = @[@"Pizza        $12.99", @"Steak        $17.99", @"Cheesecake        $9.99"];
     
-    _dropDownView = [[DropDownView alloc] initWithArrayData:_arrayData cellHeight:30 heightTableView:200 paddingTop:-8 paddingLeft:-5 paddingRight:-10 refView:_toolbar animation:BLENDIN openAnimationDuration:2 closeAnimationDuration:2];
+    _dropDown = [[DropDownViewController alloc] initWithArrayData:_arrayData cellHeight:30 heightTableView:200 paddingTop:-8 paddingLeft:-5 paddingRight:-10 refView:_toolbar animation:BLENDIN openAnimationDuration:2 closeAnimationDuration:2];
     
-    [self.view addSubview:_dropDownView.view];
+    [self.view addSubview:_dropDown.view];
     
     specialsShowing = NO;
 }
@@ -48,14 +48,14 @@
 - (void)dropMenu {
     if(specialsShowing)
     {
-        [_dropDownView closeAnimation];
+        [_dropDown closeAnimation];
         specialsShowing = NO;
         [specialsButton setImage:downImage];
         
     }
     else
     {
-        [_dropDownView openAnimation];
+        [_dropDown openAnimation];
         specialsShowing = YES;
         [specialsButton setImage:upImage];
     }
