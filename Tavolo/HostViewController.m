@@ -17,7 +17,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    if ([[[PFUser currentUser] objectForKey:@"type"] isEqualToString:@"user"]) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
  
     // Do any additional setup after loading the view.
     
@@ -36,9 +39,6 @@
             [object setObject:[PFUser currentUser] forKey:@"venue"];
             [object setObject:[NSNumber numberWithInteger:0] forKey:@"seated"];
             [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (succeeded) {
-                    NSLog(@"succeeded");
-                }
             }];
         }
     }];
@@ -60,7 +60,6 @@
                 [query getObjectInBackgroundWithId:[[[objects objectAtIndex:0] objectForKey:@"user"] objectId] block:^(PFObject *object, NSError *error) {
                     nameField.text = [object objectForKey:@"additional"];
                 }];
-//                nameField.text = [user objectForKey:@"additional"];
             }
         }];
         nameField.userInteractionEnabled = YES;

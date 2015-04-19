@@ -9,6 +9,8 @@
 #import "RestaurantTableController.h"
 #import "Customer.h"
 #import "RestaurantCell.h"
+#import "TavoloTableViewCell.h"
+#import <Parse/Parse.h>
 
 @interface RestaurantTableController ()
 
@@ -18,23 +20,21 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    Customer *cust1 = [[Customer alloc] initWithGuestName:@"Niko" partySize:@"2" tableNum:@"-1"  waitTime:@"10" seated:NO];
+/*    Customer *cust1 = [[Customer alloc] initWithGuestName:@"Niko" partySize:@"2" tableNum:@"-1"  waitTime:@"10" seated:NO];
     
-        Customer *cust2 = [[Customer alloc] initWithGuestName:@"Alex" partySize:@"2" tableNum:@"-1"  waitTime:@"9" seated:NO];
+    Customer *cust2 = [[Customer alloc] initWithGuestName:@"Alex" partySize:@"2" tableNum:@"-1"  waitTime:@"9" seated:NO];*/
     
     _currentParties = [[NSMutableArray alloc] init];
-    [_currentParties addObject:cust1];
-    [_currentParties addObject:cust2];
+    PFQuery *query =[PFQuery queryWithClassName:@"Queue"];
+    [query whereKey:@"venue" equalTo:[PFUser currentUser]];
+    _currentParties = [[query findObjects] mutableCopy];
 
      //Initialize pull-to-refresh control.
     self.refreshControl = [[UIRefreshControl alloc] init];
     self.refreshControl.backgroundColor = [UIColor grayColor];
     self.refreshControl.tintColor = [UIColor whiteColor];
-    [self.refreshControl addTarget:self action:@selector(getDownloadedResources)
+    [self.refreshControl addTarget:self action:@selector(refreshData)
                   forControlEvents:UIControlEventValueChanged];
-    UILabel * title  = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 30, 45)];
-    title.text = @"Name \t Table# \t Size \t Seated \t Wait";
-    self.tableView.tableHeaderView = title;
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
     
@@ -49,49 +49,52 @@
 
 #pragma mark - Table view data source
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80.0f;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
     return _currentParties.count;
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString * CellIdent = @"customCell";
-    RestaurantCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdent forIndexPath:indexPath];
+    static NSString * CellIdent = @"tavoloCell";
+    TavoloTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdent forIndexPath:indexPath];
     long row = [indexPath row];
     
-    Customer *tempcust = _currentParties[row];
-    cell.nameLab.text = tempcust.guestName;
-    cell.PartyLab.text =  tempcust.partySize;
-    cell.TabNumLab.text =  tempcust.table;
-    cell.WaitLab.text = tempcust.waitTime;
-    if (tempcust.seated) {
-        cell.SeatedLab.text = @"Yes";
-    }
-    else
-    {
-        cell.SeatedLab.text = @"No";
-    }
-    // Configure the cell...
+    PFObject *currentObject = [_currentParties objectAtIndex:row];
+    
+    PFQuery *userQuery = [PFUser query];
+    PFUser *user = ((PFUser *)[userQuery getObjectWithId:[[currentObject objectForKey:@"user"] objectId]]);
+    
+    cell.nameLabel.text = [user objectForKey:@"additional"];
+    cell.subLabel.text = [NSString stringWithFormat:@"%@ people", [currentObject objectForKey:@"size"]];
+    cell.waitLabel.text = [NSString stringWithFormat:@"%.0f min", (-[[currentObject updatedAt] timeIntervalSinceNow] / 60.0)];
     
     return cell;
 }
 
+- (void)refreshData {
+    PFQuery *query =[PFQuery queryWithClassName:@"Queue"];
+    [query whereKey:@"venue" equalTo:[PFUser currentUser]];
+    _currentParties = [[query findObjects] mutableCopy];
+    [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
+}
 
-/*
+
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-*/
 
 /*
 // Override to support editing the table view.
