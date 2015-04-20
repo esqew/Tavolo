@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSArray *arrayData;
 @property (strong, nonatomic) DropDownViewController *dropDown;
 
+- (IBAction)callPhone:(id)sender;
 -(void)drawCircle;
 
 @end
