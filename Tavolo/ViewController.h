@@ -10,6 +10,7 @@
 
 @interface ViewController : UIViewController {
     IBOutlet UILabel *pinLabel;
+    NSTimer *checker;
 }
 
 - (IBAction)logOut:(id)sender;

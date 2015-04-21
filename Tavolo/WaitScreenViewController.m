@@ -18,6 +18,10 @@
     Boolean specialsShowing;
 }
 
+- (BOOL)shouldAutorotate {
+    return NO;
+}
+
 - (void)viewDidLoad {
     // Do any additional setup after loading the view.
     [super viewDidLoad];
@@ -33,11 +37,25 @@
     //Set up Drop Down View
     _arrayData = @[@"Pizza        $12.99", @"Steak        $17.99", @"Cheesecake        $9.99"];
     
-    _dropDown = [[DropDownViewController alloc] initWithArrayData:_arrayData cellHeight:30 heightTableView:200 paddingTop:-8 paddingLeft:-5 paddingRight:-10 refView:_toolbar animation:BLENDIN openAnimationDuration:2 closeAnimationDuration:2];
+    _dropDown = [[DropDownViewController alloc] initWithArrayData:_arrayData cellHeight:30 heightTableView:200 paddingTop:-8 paddingLeft:-5 paddingRight:-10 refView:_toolbar animation:BLENDIN openAnimationDuration:1 closeAnimationDuration:1];
     
     [self.view addSubview:_dropDown.view];
     
     specialsShowing = NO;
+}
+
+- (void)setUpView:(PFObject *)object {
+    
+}
+
+- (IBAction)leaveQueue:(id)sender {
+    PFQuery *query = [PFQuery queryWithClassName:@"Queue"];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query whereKeyExists:@"venue"];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        [((PFObject *)[objects objectAtIndex:0]) deleteInBackground];
+    }];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -73,8 +91,8 @@
     circle.path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 2.0*radius, 2.0*radius)
                                              cornerRadius:radius].CGPath;
     // Center the shape in self.view
-    circle.position = CGPointMake(CGRectGetMidX(self.view.frame)-radius,
-                                  CGRectGetMidY(self.view.frame)-radius -120);
+    circle.position = CGPointMake(CGRectGetMidX(self.waitTimeLabel.frame)-radius - 128,
+                                  CGRectGetMidY(self.waitTimeLabel.frame)-radius - 133);
     
     // Configure the apperence of the circle
     circle.fillColor = [UIColor lightGrayColor].CGColor;
@@ -83,7 +101,7 @@
     //circle.lineWidth = 5;
     
     // Add to parent layer
-    [self.view.layer addSublayer:circle];
+    [self.waitTimeLabel.layer addSublayer:circle];
 }
 
 

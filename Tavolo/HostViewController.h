@@ -11,8 +11,10 @@
 @interface HostViewController : UIViewController <UITextFieldDelegate> {
     IBOutlet UITextField *pinField;
     IBOutlet UITextField *nameField;
+    IBOutlet UITextField *sizeField;
 }
 
 - (IBAction)addToQueue:(id)sender;
+- (IBAction)logOut:(id)sender;
 
 @end

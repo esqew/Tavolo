@@ -373,8 +373,8 @@
 				D98802161ADDA1FA003C8EC5 /* DropDownViewController.m */,
 				D98802051ADCABE1003C8EC5 /* PinViewController.m */,
 				D98802041ADCABE1003C8EC5 /* PinViewController.h */,
-				D98802081ADCAD4F003C8EC5 /* WaitScreenViewController.m */,
 				D98802071ADCAD4F003C8EC5 /* WaitScreenViewController.h */,
+				D98802081ADCAD4F003C8EC5 /* WaitScreenViewController.m */,
 			);
 			name = "Wait Screen";
 			sourceTree = "<group>";

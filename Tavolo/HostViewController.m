@@ -28,6 +28,11 @@
     pinField.keyboardType = UIKeyboardTypeNumberPad;
 }
 
+- (IBAction)logOut:(id)sender {
+    [PFUser logOut];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (IBAction)addToQueue:(id)sender {
     PFQuery *addQuery = [PFQuery queryWithClassName:@"Queue"];
     NSNumber *number = [NSNumber numberWithInteger:[pinField.text integerValue]];
@@ -37,6 +42,7 @@
         else {
             PFObject *object = [objects objectAtIndex:0];
             [object setObject:[PFUser currentUser] forKey:@"venue"];
+            [object setObject:[NSNumber numberWithInt:[sizeField.text intValue]] forKey:@"size"];
             [object setObject:[NSNumber numberWithInteger:0] forKey:@"seated"];
             [object saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             }];

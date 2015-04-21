@@ -46,6 +46,8 @@
     
     pinLabel.layer.cornerRadius = 5.0f;
     pinLabel.clipsToBounds = YES;
+    
+    pinLabel.alpha = 0.0f;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -77,8 +79,31 @@
                 // if user isn't a restaurant account, get a PIN for the user
                 [PFCloud callFunctionInBackground:@"generatePIN" withParameters:@{} block:^(id object, NSError *error) {
                     pinLabel.text = [NSString stringWithFormat:@"%@", object];
+                    [UIView animateWithDuration:0.5 animations:^{
+                        pinLabel.alpha = 1.0f;
+                    }];
+                    checker = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(checkForUpdate:) userInfo:self repeats:YES];
                 }];
             }
+        }];
+    }
+}
+
+- (void)checkForUpdate:(id)sender {
+    if (![PFUser currentUser]) [checker invalidate];
+    else {
+        PFQuery *query = [PFQuery queryWithClassName:@"Queue"];
+        [query whereKey:@"user" equalTo:[PFUser currentUser]];
+        [query whereKeyExists:@"venue"];
+        
+        [query findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+            PFQuery *restaurantQuery = [PFUser query];
+            [restaurantQuery whereKey:@"objectId" equalTo:[[[objects objectAtIndex:0] objectForKey:@"venue"] objectId]];
+            [restaurantQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+                PFUser *restaurant = [objects objectAtIndex:0];
+                [self performSegueWithIdentifier:@"waitScreenSegue" sender:nil];
+                [checker invalidate];
+            }];
         }];
     }
 }

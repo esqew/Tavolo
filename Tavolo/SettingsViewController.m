@@ -7,6 +7,7 @@
 //
 
 #import "SettingsViewController.h"
+#import <Parse/Parse.h>
 
 @interface SettingsViewController ()
 
@@ -18,6 +19,11 @@
     [super viewDidLoad];
         // Do any additional setup after loading the view.
 }
+
+- (BOOL)prefersStatusBarHidden {
+    return YES;
+}
+
 - (IBAction)saveClick:(id)sender {
     NSString *docDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString *dirName = [docDir stringByAppendingPathComponent:@"settings"];

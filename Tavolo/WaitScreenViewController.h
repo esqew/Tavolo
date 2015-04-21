@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Parse/Parse.h>
 #import "DropDownViewController.h"
 
 @interface WaitScreenViewController : UIViewController
@@ -18,6 +19,8 @@
 @property (strong, nonatomic) DropDownViewController *dropDown;
 
 - (IBAction)callPhone:(id)sender;
--(void)drawCircle;
+- (IBAction)leaveQueue:(id)sender;
+- (void)drawCircle;
+- (void)setUpView:(PFObject *)object;
 
 @end
