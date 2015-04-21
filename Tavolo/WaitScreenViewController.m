@@ -61,6 +61,10 @@
     }
 }
 
+- (IBAction)callPhone:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://6103372200"]];
+}
+
 - (void)drawCircle {
     // Set up the shape of the circle
     int radius = 90;
