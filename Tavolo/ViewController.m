@@ -72,7 +72,7 @@
         // if this is a restaurant account, move them directly to the hostess view
         [[PFUser currentUser] fetchInBackgroundWithBlock:^(PFObject *object, NSError *error) {
             if ([[object objectForKey:@"type"] isEqualToString:@"restaurant"]) {
-                [self performSegueWithIdentifier:@"restaurantView" sender:nil];
+                [self performSegueWithIdentifier:@"restaurantSegue" sender:nil];
             } else {
                 // if user isn't a restaurant account, get a PIN for the user
                 [PFCloud callFunctionInBackground:@"generatePIN" withParameters:@{} block:^(id object, NSError *error) {
