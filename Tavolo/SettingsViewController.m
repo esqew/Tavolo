@@ -25,7 +25,46 @@
 }
 
 - (IBAction)saveClick:(id)sender {
-    NSString *docDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
+    NSNumber *two = @([_twoTable.text integerValue]);
+    NSNumber *three = @([_threeTable.text integerValue]);
+    NSNumber *four = @([_fourTable.text integerValue]);
+    NSNumber *five = @([_fiveTable.text integerValue]);
+
+    PFQuery *q = [PFQuery queryWithClassName:@"RestaurantSettings"];
+    [q whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
+    [q findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!error) {
+            // The find succeeded.
+            if(objects.count == 0)
+            {
+                PFObject *addSettings = [PFObject objectWithClassName:@"RestaurantSettings"];
+                addSettings[@"restaurant"] = [PFUser currentUser].objectId;
+                addSettings[@"tables2"] = two;
+                addSettings[@"tables3"] = three;
+                addSettings[@"tables4"] = four;
+                addSettings[@"tables5"] = five;
+                [addSettings saveInBackground];
+
+            }
+            else
+            {
+                NSLog(@"Record Exists");
+                PFObject *obj = [objects objectAtIndex:0];
+                obj[@"tables2"] = two;
+                obj[@"tables3"] = three;
+                obj[@"tables4"] = four;
+                obj[@"tables5"] = five;
+                [obj saveInBackground];
+            }
+            
+        } else {
+            // Log details of the failure
+            NSLog(@"Error: %@ %@", error, [error userInfo]);
+        }
+    }];
+   
+    
+    /*NSString *docDir = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)[0];
     NSString *dirName = [docDir stringByAppendingPathComponent:@"settings"];
     
     BOOL isDir;
@@ -71,7 +110,7 @@
             NSLog(@"Create file returned NO");
         }
     }
-
+*/
 }
 
 - (void)didReceiveMemoryWarning {

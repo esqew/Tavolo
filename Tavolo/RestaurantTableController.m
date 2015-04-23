@@ -55,7 +55,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 1;
+    return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -95,7 +95,21 @@
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    if (tableView.tag==2)
+    {
+        if (section == 0)
+        {
+            return @"test1";
+        }
+        if (section == 1)
+        {
+            return @"test2";
+        }
+    }
+    return @"";
+}
 /*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
