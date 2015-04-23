@@ -47,6 +47,8 @@
 		EE32A0951AD972A20056BA25 /* RestaurantTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = EE32A0941AD972A20056BA25 /* RestaurantTableController.m */; };
 		EE32A0981AD974D10056BA25 /* RestaurantCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EE32A0971AD974D10056BA25 /* RestaurantCell.m */; };
 		EE32A09B1AD975C20056BA25 /* Customer.m in Sources */ = {isa = PBXBuildFile; fileRef = EE32A0991AD975C20056BA25 /* Customer.m */; };
+		EEB2FB141AE98EFC0032DDD4 /* SeatController.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB2FB101AE98EFC0032DDD4 /* SeatController.m */; };
+		EEB2FB151AE98EFC0032DDD4 /* SeatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EEB2FB111AE98EFC0032DDD4 /* SeatCell.m */; };
 		EED122A71AC7A1DB00DE7B42 /* HostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED122A61AC7A1DB00DE7B42 /* HostViewController.m */; };
 		EED122AC1AD2252600DE7B42 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = EED122AB1AD2252600DE7B42 /* SettingsViewController.m */; };
 /* End PBXBuildFile section */
@@ -122,6 +124,10 @@
 		EE32A0971AD974D10056BA25 /* RestaurantCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RestaurantCell.m; sourceTree = "<group>"; };
 		EE32A0991AD975C20056BA25 /* Customer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Customer.m; sourceTree = "<group>"; };
 		EE32A09A1AD975C20056BA25 /* Customer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Customer.h; sourceTree = "<group>"; };
+		EEB2FB101AE98EFC0032DDD4 /* SeatController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeatController.m; path = ../SeatController.m; sourceTree = "<group>"; };
+		EEB2FB111AE98EFC0032DDD4 /* SeatCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SeatCell.m; path = ../SeatCell.m; sourceTree = "<group>"; };
+		EEB2FB121AE98EFC0032DDD4 /* SeatController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeatController.h; path = ../SeatController.h; sourceTree = "<group>"; };
+		EEB2FB131AE98EFC0032DDD4 /* SeatCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SeatCell.h; path = ../SeatCell.h; sourceTree = "<group>"; };
 		EED122A51AC7A1DB00DE7B42 /* HostViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HostViewController.h; sourceTree = "<group>"; };
 		EED122A61AC7A1DB00DE7B42 /* HostViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HostViewController.m; sourceTree = "<group>"; };
 		EED122AA1AD2252600DE7B42 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
@@ -203,6 +209,10 @@
 				144BEC361A7D890E00A66822 /* Main.storyboard */,
 				D988020D1ADD61C8003C8EC5 /* Wait Screen */,
 				1469AED71ADA0B03006D52BB /* RestaurantCell */,
+				EEB2FB101AE98EFC0032DDD4 /* SeatController.m */,
+				EEB2FB111AE98EFC0032DDD4 /* SeatCell.m */,
+				EEB2FB121AE98EFC0032DDD4 /* SeatController.h */,
+				EEB2FB131AE98EFC0032DDD4 /* SeatCell.h */,
 				EED122AA1AD2252600DE7B42 /* SettingsViewController.h */,
 				EED122AB1AD2252600DE7B42 /* SettingsViewController.m */,
 				EE32A0931AD972A20056BA25 /* RestaurantTableController.h */,
@@ -498,6 +508,7 @@
 				144BEC351A7D890E00A66822 /* ViewController.m in Sources */,
 				14854D6A1A7F47F100121D24 /* TavoloLabel.m in Sources */,
 				144BEC321A7D890E00A66822 /* AppDelegate.m in Sources */,
+				EEB2FB151AE98EFC0032DDD4 /* SeatCell.m in Sources */,
 				EED122AC1AD2252600DE7B42 /* SettingsViewController.m in Sources */,
 				D98802061ADCABE1003C8EC5 /* PinViewController.m in Sources */,
 				144BEC2F1A7D890E00A66822 /* main.m in Sources */,
@@ -510,6 +521,7 @@
 				141222861A98381600C61EEE /* TavoloSignupViewController.m in Sources */,
 				1483DFD01A841F7E00D1E894 /* TavoloLoginViewController.m in Sources */,
 				D98802171ADDA1FA003C8EC5 /* DropDownViewController.m in Sources */,
+				EEB2FB141AE98EFC0032DDD4 /* SeatController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
