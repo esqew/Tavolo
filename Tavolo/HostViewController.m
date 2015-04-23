@@ -53,6 +53,8 @@
     counter = [counter stringByAppendingString:sizeField.text];
     people = [people stringByAppendingString:sizeField.text];
     NSNumber *num = [NSNumber numberWithInt:[sizeField.text integerValue]];
+    NSNumber *pinNum = [NSNumber numberWithInt:[pinField.text integerValue]];
+
     /* Check Query : so using restaurant objectid and table size find how many available tables*/
     [check whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
     [check getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
@@ -84,15 +86,20 @@
                  NSInteger count = [[objects objectForKey:counter] integerValue]; //Look at people column
                  NSInteger waitval = mins/count; //Create avg expected wait time
                  NSDate *end = [today dateByAddingTimeInterval:waitval*60]; //add to the time now
-                 
-
+                 PFQuery *pin = [PFQuery queryWithClassName:@"Queue"];
+                 [pin whereKey:@"pin" equalTo:pinNum];
+                 [pin getFirstObjectInBackgroundWithBlock:^(PFObject *obj, NSError *er)
+                  {
+                      PFObject * seat = [PFObject objectWithClassName:@"Seated"];
+                      seat[@"EndTime"] = end;
+                      seat[@"user"] = [obj objectForKey:@"user"];
+                      seat[@"restaurant"] = [PFUser currentUser].objectId;//This is incorrect not sure how to get user associated with pin
+                      seat[@"Size"] = num;
+                      [seat saveInBackground];
+                  }];
                  
                  //Create a record to put in Seated Table with when expected to finish eating
-                 PFObject * seat = [PFObject objectWithClassName:@"Seated"];
-                 seat[@"EndTime"] = end;
-                 seat[@"restaurant"] = [PFUser currentUser].objectId;//This is incorrect not sure how to get user associated with pin
-                 seat[@"Size"] = num;
-                 [seat saveInBackground];
+
              }];
             
         }
@@ -119,9 +126,9 @@
             PFQuery * wait = [PFQuery queryWithClassName:@"newQueue"];
             [wait whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId]; //based on Restaurant ID
             [wait whereKey:@"partySize" equalTo:s]; // Based on Party Size
-            [wait findObjectsInBackgroundWithBlock:^(NSArray *obj, NSError *er)
+            [wait findObjectsInBackgroundWithBlock:^(NSArray *waitObj, NSError *er)
              {
-                 NSLog(@"%lu, %@", (unsigned long)obj.count, s);
+                 NSLog(@"%lu, %@", (unsigned long)waitObj.count, s);
                  //Now we have objects that are restricted to a party size and Restaurant
                  //Now need to find the expected time to finish for seated Customer
                  /*To Explain if customer is the 3rd person in line waited to be seated then the corresponding wait time would be the 3rd person closest to finish eating. So this query finds all of the people eating at a restaurant with a specific party size and orders them by when they were added to the Seat queue since they would finish first*/
@@ -129,12 +136,14 @@
                  [addqueue whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
                  [addqueue whereKey:@"Size" equalTo:s];
                  [addqueue orderByAscending:@"createdAt"];
-                 [addqueue findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                     if (!error) {
-                         NSLog(@"OBJECTS%lu", objects.count);
-                         if(obj.count > objects.count)
+                 [addqueue findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error)
+                  {
+                     if (!error)
+                     {
+                         NSLog(@"OBJECTS%lu and %lu", objects.count, waitObj.count);
+                         if(waitObj.count >= objects.count)
                          {
-                             long counter2 = obj.count - objects.count;
+                             long counter2 = waitObj.count - objects.count;
                              PFQuery * time2 = [PFQuery queryWithClassName:@"Stats"];
                              [time2 whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId]; //So get record for Restaurant based on Id of the logged in Restaurant
                              [time2 getFirstObjectInBackgroundWithBlock:^(PFObject *objects, NSError *error)
@@ -143,19 +152,38 @@
                                   NSInteger count2 = [[objects objectForKey:counter] integerValue]; //Look at people column
                                   NSInteger waitval2 = mins2/count2; //Create avg expected wait time
                                   NSDate *end2 = [today dateByAddingTimeInterval:waitval2*60*counter2]; //add to the time now
-                                  
+                                  PFQuery *name = [PFQuery queryWithClassName:@"Queue"];
+                                  [name whereKey:@"pin" equalTo:pinNum];
+                                  [name getFirstObjectInBackgroundWithBlock:^(PFObject *person, NSError *error)
+                                  {
+                                      PFObject *eat = [PFObject objectWithClassName:@"newQueue"];
+                                      eat[@"restaurant"]=[PFUser currentUser].objectId;
+                                      eat[@"seatTime"] = end2;
+                                      eat[@"partySize"] = s;
+                                      eat[@"user"] = [person objectForKey:@"user"];
+                                      [eat saveInBackground];
+                                  }];
+
                               }];
                              
                              
                          }
-                         //Creates an object to be added to the queue
-                         PFObject *waiter = [PFObject objectWithClassName:@"newQueue"];
-                         waiter[@"restaurant"] = [PFUser currentUser].objectId; //links user to restuarant
-                         PFObject * temp = [objects objectAtIndex:obj.count]; //Finds corresponding EndTime for when they can expect to sit down and eat
-                         
-                         waiter[@"seatTime"] = [temp objectForKey:@"EndTime"];
-                         waiter[@"partySize"] = s;
-                         [waiter saveInBackground]; //adds to queue
+                         else
+                         {
+                             NSLog(@"HERE");
+                             PFQuery *addname = [PFQuery queryWithClassName:@"Queue"];
+                             [addname whereKey:@"pin" equalTo:pinNum];
+                             [addname getFirstObjectInBackgroundWithBlock:^(PFObject *persons, NSError *error){
+                              //Creates an object to be added to the queue
+                              PFObject *waiter = [PFObject objectWithClassName:@"newQueue"];
+                              waiter[@"restaurant"] = [PFUser currentUser].objectId; //links user to restuarant
+                              PFObject * temp = [objects objectAtIndex:waitObj.count]; //Finds corresponding EndTime for when they can expect to sit down and eat
+                              waiter[@"seatTime"] = [temp objectForKey:@"EndTime"];
+                              waiter[@"partySize"] = s;
+                                 waiter[@"user"] = [persons objectForKey:@"user"];
+                              [waiter saveInBackground]; //adds to queue
+                             }];
+                         }
                      } else {
                          // Log details of the failure
                          NSLog(@"Error: %@ %@", error, [error userInfo]);

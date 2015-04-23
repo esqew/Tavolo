@@ -7,7 +7,7 @@
 //
 
 #import "WaitScreenViewController.h"
-
+#import <Parse/Parse.h>
 @interface WaitScreenViewController ()
 
 @end
@@ -42,6 +42,33 @@
     [self.view addSubview:_dropDown.view];
     
     specialsShowing = NO;
+    PFQuery *query = [PFQuery queryWithClassName:@"newQueue"];
+    [query whereKey:@"user" equalTo:[PFUser currentUser]];
+    [query findObjectsInBackgroundWithBlock:^(NSArray *waitObj, NSError *er)
+     {
+         if(waitObj.count == 0)
+         {
+             _waitTimeLabel.text = @"0";
+         }
+         else
+         {
+             PFObject *obj = [waitObj objectAtIndex:0];
+
+             NSDate *start = [obj createdAt];
+             NSDate *end = [obj objectForKey:@"seatTime"];
+             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+             [dateFormatter setDateFormat:@"hh:mm a"];
+             NSString *stringFromDate = [dateFormatter stringFromDate:[obj objectForKey:@"createdAt"]];
+             NSString *stringFromDate2 = [dateFormatter stringFromDate:[obj objectForKey:@"seatTime"]];
+             NSLog(@"Date 1: %@ ... Date 2: %@", stringFromDate, stringFromDate2);
+              NSTimeInterval distanceBetweenDates = [end timeIntervalSinceDate:start];
+             double secondsInAMin = 60;
+             NSInteger mins = distanceBetweenDates / secondsInAMin;
+             NSLog(@"Minutes %lu", mins);
+             NSString *minutes = [NSString stringWithFormat:@"%lu", mins];
+             _waitTimeLabel.text = minutes;
+         }
+     }];
 }
 
 - (void)setUpView:(PFObject *)object {

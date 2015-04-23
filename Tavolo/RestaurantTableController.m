@@ -12,21 +12,26 @@
 #import "TavoloTableViewCell.h"
 #import <Parse/Parse.h>
 
-@interface RestaurantTableController ()
-
+@interface RestaurantTableController (){
+    NSArray *sectionTitles;
+}
 @end
 
 @implementation RestaurantTableController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    sectionTitles = @[@"2 People", @"3 People", @"4 People", @"5+People"];
+
+
 /*    Customer *cust1 = [[Customer alloc] initWithGuestName:@"Niko" partySize:@"2" tableNum:@"-1"  waitTime:@"10" seated:NO];
     
     Customer *cust2 = [[Customer alloc] initWithGuestName:@"Alex" partySize:@"2" tableNum:@"-1"  waitTime:@"9" seated:NO];*/
     
     _currentParties = [[NSMutableArray alloc] init];
-    PFQuery *query =[PFQuery queryWithClassName:@"Queue"];
-    [query whereKey:@"venue" equalTo:[PFUser currentUser]];
+    PFQuery *query =[PFQuery queryWithClassName:@"newQueue"];
+    [query whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
+    [query orderByAscending:@"partySize"];
     _currentParties = [[query findObjects] mutableCopy];
 
      //Initialize pull-to-refresh control.
@@ -37,7 +42,7 @@
                   forControlEvents:UIControlEventValueChanged];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    
+    self.tableView.allowsMultipleSelectionDuringEditing = NO;
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
@@ -55,12 +60,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 4;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    // Return the number of rows in the section.
+
     return _currentParties.count;
+
 }
 
 
@@ -75,15 +81,16 @@
     PFUser *user = ((PFUser *)[userQuery getObjectWithId:[[currentObject objectForKey:@"user"] objectId]]);
     
     cell.nameLabel.text = [user objectForKey:@"additional"];
-    cell.subLabel.text = [NSString stringWithFormat:@"%@ people", [currentObject objectForKey:@"size"]];
+    cell.subLabel.text = [NSString stringWithFormat:@"%@ people", [currentObject objectForKey:@"partySize"]];
     cell.waitLabel.text = [NSString stringWithFormat:@"%.0f min", (-[[currentObject updatedAt] timeIntervalSinceNow] / 60.0)];
     
     return cell;
 }
 
 - (void)refreshData {
-    PFQuery *query =[PFQuery queryWithClassName:@"Queue"];
-    [query whereKey:@"venue" equalTo:[PFUser currentUser]];
+    PFQuery *query =[PFQuery queryWithClassName:@"newQueue"];
+    [query whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
+    [query orderByAscending:@"partySize"];
     _currentParties = [[query findObjects] mutableCopy];
     [self.tableView reloadData];
     [self.refreshControl endRefreshing];
@@ -95,21 +102,19 @@
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-{
-    if (tableView.tag==2)
-    {
-        if (section == 0)
-        {
-            return @"test1";
-        }
-        if (section == 1)
-        {
-            return @"test2";
-        }
-    }
-    return @"";
+
+
+// Override to support editing the table view.
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+                [_currentParties removeObjectAtIndex:indexPath.row];
+              [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];   }
 }
+
+/*- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    return [sectionTitles objectAtIndex:section];
+}*/
 /*
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
