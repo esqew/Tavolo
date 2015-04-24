@@ -16,6 +16,8 @@
     UIImage *downImage, *upImage;
     UIBarButtonItem *specialsButton;
     Boolean specialsShowing;
+    NSInteger mins;
+    NSTimer *timer;
 }
 
 - (BOOL)shouldAutorotate {
@@ -42,6 +44,8 @@
     [self.view addSubview:_dropDown.view];
     
     specialsShowing = NO;
+    
+    //Wait Time
     PFQuery *query = [PFQuery queryWithClassName:@"newQueue"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *waitObj, NSError *er)
@@ -63,12 +67,29 @@
              NSLog(@"Date 1: %@ ... Date 2: %@", stringFromDate, stringFromDate2);
               NSTimeInterval distanceBetweenDates = [end timeIntervalSinceDate:start];
              double secondsInAMin = 60;
-             NSInteger mins = distanceBetweenDates / secondsInAMin;
+             mins = distanceBetweenDates / secondsInAMin;
              NSLog(@"Minutes %lu", mins);
              NSString *minutes = [NSString stringWithFormat:@"%lu", mins];
              _waitTimeLabel.text = minutes;
+             
+             //Start timer to update waiting time every minute
+             timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(updateWaitTime) userInfo:nil repeats:YES];
          }
      }];
+}
+
+//Fired by timer to update wait time label every minute
+- (void)updateWaitTime {
+    if(mins == 0)
+    {
+        [timer invalidate];
+    }
+    else
+    {
+        mins--;
+        NSString *waitTime = [NSString stringWithFormat:@"%lu",mins];
+        _waitTimeLabel.text = waitTime;
+    }
 }
 
 - (void)setUpView:(PFObject *)object {
