@@ -118,7 +118,7 @@
             if ([[chairs objectForKey:table]integerValue ] > 0)
             {
                 
-                chairs[table] = @([[chairs objectForKey:table] integerValue]+1);
+                chairs[table] = @([[chairs objectForKey:table] integerValue]-1);
                 [chairs saveInBackground];
                 PFQuery *q = [PFQuery queryWithClassName:@"Stats"];
                 [q whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];

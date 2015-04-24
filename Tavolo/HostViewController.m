@@ -143,7 +143,9 @@
                          NSLog(@"OBJECTS%lu and %lu", objects.count, waitObj.count);
                          if(waitObj.count >= objects.count)
                          {
-                             long counter2 = waitObj.count - objects.count;
+                             NSDate *next = [[objects objectAtIndex:objects.count-1] objectForKey:@"EndTime"];
+                             NSLog(@"%@", next);
+                             long counter2 = waitObj.count - objects.count+1;
                              PFQuery * time2 = [PFQuery queryWithClassName:@"Stats"];
                              [time2 whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId]; //So get record for Restaurant based on Id of the logged in Restaurant
                              [time2 getFirstObjectInBackgroundWithBlock:^(PFObject *objects, NSError *error)
@@ -151,7 +153,9 @@
                                   NSInteger mins2 = [[objects objectForKey:people] integerValue]; //Look at Mins column
                                   NSInteger count2 = [[objects objectForKey:counter] integerValue]; //Look at people column
                                   NSInteger waitval2 = mins2/count2; //Create avg expected wait time
-                                  NSDate *end2 = [today dateByAddingTimeInterval:waitval2*60*counter2]; //add to the time now
+                                  NSDate *end2 = [next dateByAddingTimeInterval:waitval2*60*counter2]; //add to the time now
+                                  NSLog(@"Begin : %@...End : %@", next, end2);
+
                                   PFQuery *name = [PFQuery queryWithClassName:@"Queue"];
                                   [name whereKey:@"pin" equalTo:pinNum];
                                   [name getFirstObjectInBackgroundWithBlock:^(PFObject *person, NSError *error)
