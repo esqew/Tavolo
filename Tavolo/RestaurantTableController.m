@@ -107,8 +107,44 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
-                [_currentParties removeObjectAtIndex:indexPath.row];
-              [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];   }
+ 
+        PFObject *obj = [_currentParties objectAtIndex:indexPath.row];
+        NSString *table = [NSString stringWithFormat:@"tables%@",[[_currentParties objectAtIndex:indexPath.row] objectForKey:@"partySize"]];
+        NSString *counter = [NSString stringWithFormat:@"counter%@",[[_currentParties objectAtIndex:indexPath.row] objectForKey:@"partySize"]];
+        NSString *people = [NSString stringWithFormat:@"people%@",[[_currentParties objectAtIndex:indexPath.row] objectForKey:@"partySize"]];
+        PFQuery *settings = [PFQuery queryWithClassName:@"RestaurantSettings"];
+        [settings whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
+        [settings getFirstObjectInBackgroundWithBlock:^(PFObject *chairs, NSError *error) {
+            if ([[chairs objectForKey:table]integerValue ] > 0)
+            {
+                
+                chairs[table] = @([[chairs objectForKey:table] integerValue]+1);
+                [chairs saveInBackground];
+                PFQuery *q = [PFQuery queryWithClassName:@"Stats"];
+                [q whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
+                [q getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
+                {
+                    NSInteger mins = [[object objectForKey:people] integerValue]; //Look at Mins column
+                    NSInteger count = [[object objectForKey:counter] integerValue]; //Look at people column
+                    NSInteger waitval = mins/count; //Create avg expected wait time
+                    PFObject *seatQueue = [PFObject objectWithClassName:@"Seated"];
+                    seatQueue[@"restaurant"] = [obj objectForKey:@"restaurant"];
+                    seatQueue[@"user"] = [obj objectForKey:@"user"];
+                    seatQueue[@"Size"] = [obj objectForKey:@"partySize"];
+                    mins = [[object objectForKey:people] integerValue]; //Look at Mins column
+                    count = [[object objectForKey:counter] integerValue]; //Look at people column
+                    waitval = mins/count;
+                    NSDate *end = [[NSDate date] dateByAddingTimeInterval:waitval*60]; //add to the time now
+                    seatQueue[@"EndTime"] = end;
+                    [seatQueue saveInBackground];
+                    [[_currentParties objectAtIndex:indexPath.row] deleteInBackground];
+                    [_currentParties removeObjectAtIndex:indexPath.row];
+                    [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+               
+                 }];
+            }
+        }];
+    }
 }
 
 /*- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section

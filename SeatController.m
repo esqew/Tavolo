@@ -83,7 +83,7 @@
 
 - (void)refreshData {
     PFQuery *query =[PFQuery queryWithClassName:@"Seated"];
-    [query whereKey:@"restaurant" equalTo:[PFUser currentUser]];
+    [query whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
     [query orderByAscending:@"Size"];
     _seatedParties = [[query findObjects] mutableCopy];
     [self.tableView reloadData];
@@ -101,8 +101,43 @@
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        NSString *table = [NSString stringWithFormat:@"tables%@",[[_seatedParties objectAtIndex:indexPath.row] objectForKey:@"Size"]];
+        NSString *counter = [NSString stringWithFormat:@"counter%@",[[_seatedParties objectAtIndex:indexPath.row] objectForKey:@"Size"]];
+        NSString *people = [NSString stringWithFormat:@"people%@",[[_seatedParties objectAtIndex:indexPath.row] objectForKey:@"Size"]];
+        NSDate *start = [[_seatedParties objectAtIndex:indexPath.row] createdAt];
+        PFQuery *addSeat = [PFQuery queryWithClassName:@"RestaurantSettings"];
+        [addSeat whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
+        [addSeat getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+            NSNumber *seats = [object objectForKey:table];
+            NSNumber *chairs = @([seats integerValue] + 1);
+
+            object[table] = chairs;
+            [object saveInBackground];
+        }];
+        PFQuery *stats = [PFQuery queryWithClassName:@"Stats"];
+        [stats whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
+        [stats getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error) {
+ 
+            
+            NSLog(@"PROBLEM 2");
+
+            NSLog(@"%@", start);
+            NSDate *finish = [NSDate date];
+            NSTimeInterval distanceBetweenDates = [finish timeIntervalSinceDate:start]/60;
+
+            NSNumber *mins = @([[object objectForKey:counter] integerValue]+1);
+            NSLog(@"Mins :%f", distanceBetweenDates);
+            NSNumber *value = @([[object objectForKey:people] integerValue]+distanceBetweenDates);
+            
+            object[counter] = mins;
+            object[people] = value;
+            [object saveInBackground];
+            
+        }];
+        [[_seatedParties objectAtIndex:indexPath.row] deleteInBackground];
         [_seatedParties removeObjectAtIndex:indexPath.row];
-        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];   }
+        [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
 
 
