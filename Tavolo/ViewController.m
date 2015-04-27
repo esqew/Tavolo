@@ -66,7 +66,6 @@
             PFQuery *restaurantQuery = [PFUser query];
             [restaurantQuery whereKey:@"objectId" equalTo:[[[objects objectAtIndex:0] objectForKey:@"venue"] objectId]];
             [restaurantQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
-                PFUser *restaurant = [objects objectAtIndex:0];
                 [self performSegueWithIdentifier:@"waitScreenSegue" sender:nil];
             }];
         }];

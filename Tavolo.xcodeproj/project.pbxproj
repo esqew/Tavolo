@@ -111,7 +111,7 @@
 		14D522551ADF334400AA604D /* Up4-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Up4-50.png"; sourceTree = "<group>"; };
 		D98802041ADCABE1003C8EC5 /* PinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinViewController.h; sourceTree = "<group>"; };
 		D98802051ADCABE1003C8EC5 /* PinViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinViewController.m; sourceTree = "<group>"; };
-		D98802071ADCAD4F003C8EC5 /* WaitScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitScreenViewController.h; sourceTree = "<group>"; };
+		D98802071ADCAD4F003C8EC5 /* WaitScreenViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WaitScreenViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		D98802081ADCAD4F003C8EC5 /* WaitScreenViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WaitScreenViewController.m; sourceTree = "<group>"; };
 		D988020E1ADD6789003C8EC5 /* Down4-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Down4-50.png"; path = "../../../Down4-50.png"; sourceTree = "<group>"; };
 		D98802111ADD7623003C8EC5 /* Up4-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Up4-50.png"; path = "../../../Up4-50.png"; sourceTree = "<group>"; };

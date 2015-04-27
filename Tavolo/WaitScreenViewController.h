@@ -8,9 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
+#import <CoreLocation/CoreLocation.h>
 #import "DropDownViewController.h"
 
-@interface WaitScreenViewController : UIViewController
+@interface WaitScreenViewController : UIViewController <CLLocationManagerDelegate> {
+    CLLocationManager *locationManager;
+    CLLocation *lastLocation;
+    
+    PFGeoPoint *venueLocation;
+}
+
 @property (strong, nonatomic) IBOutlet UILabel *waitTimeLabel;
 @property (strong, nonatomic) IBOutlet UILabel *returnTimeLabel;
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;

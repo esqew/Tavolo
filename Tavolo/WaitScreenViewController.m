@@ -7,7 +7,7 @@
 //
 
 #import "WaitScreenViewController.h"
-#import <Parse/Parse.h>
+
 @interface WaitScreenViewController ()
 
 @end
@@ -28,6 +28,25 @@
     // Do any additional setup after loading the view.
     [super viewDidLoad];
     [self drawCircle];
+    
+    // start location services
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.delegate = self;
+    if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+        [locationManager requestAlwaysAuthorization];
+    }
+    [locationManager startUpdatingLocation];
+    
+    // get info about restaurant
+    PFQuery *queueQuery = [PFQuery queryWithClassName:@"Queue"];
+    [queueQuery whereKey:@"user" equalTo:[PFUser currentUser]];
+    [queueQuery includeKey:@"venue"];
+    [queueQuery findObjectsInBackgroundWithBlock:^(NSArray *objects, NSError *error) {
+        if (!objects || objects.count == 0) [NSException raise:@"something went wrong with the query" format:nil];
+        PFObject *venue = [((PFObject *)[objects objectAtIndex:1]) objectForKey:@"venue"];
+        venueLocation = [venue objectForKey:@"location"];
+    }];
     
     //Set up toolbar
     downImage = [UIImage imageNamed:@"Down4-50.png"];
@@ -92,8 +111,10 @@
     }
 }
 
-- (void)setUpView:(PFObject *)object {
-    
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    lastLocation = ((CLLocation *)[locations lastObject]);
+    PFGeoPoint *currentLocationGeoPoint = [PFGeoPoint geoPointWithLocation:lastLocation];
+    if (venueLocation) [self getWalkingTimeFromLocation:currentLocationGeoPoint toLocation:venueLocation];
 }
 
 - (IBAction)leaveQueue:(id)sender {
@@ -150,6 +171,40 @@
     
     // Add to parent layer
     [self.waitTimeLabel.layer addSublayer:circle];
+}
+
+- (NSString *)getWalkingTimeFromLocation:(PFGeoPoint *)currentLocation toLocation:(PFGeoPoint *)theVenueLocation {
+    NSString *walkingTime = [[NSString alloc] init];
+    
+    if (!currentLocation || !theVenueLocation) {
+        [NSException raise:@"calls to getWalkingTimeFromLocation:toLocation: must provide both location arguments" format:nil];
+    }
+    
+    NSString *apiURL = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/distancematrix/json?origins=%f,%f&destinations=%f,%f&mode=walking", currentLocation.latitude, currentLocation.longitude, theVenueLocation.latitude, theVenueLocation.longitude];
+    
+    NSURL *url = [NSURL URLWithString:apiURL];
+    
+    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+    [request setURL:url];
+    [request setHTTPMethod:@"GET"];
+    
+    NSURLResponse *response;
+    NSError *error;
+    NSData *data;
+    data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    
+    NSMutableDictionary *jsonDict= (NSMutableDictionary*)[NSJSONSerialization  JSONObjectWithData:data options:kNilOptions error:&error];
+    NSMutableDictionary *newdict=[jsonDict valueForKey:@"rows"];
+    NSArray *elementsArr=[newdict valueForKey:@"elements"];
+    NSArray *arr=[elementsArr objectAtIndex:0];
+    NSDictionary *dict=[arr objectAtIndex:0];
+    NSMutableDictionary *distanceDict=[dict valueForKey:@"duration"];
+    
+    walkingTime = [distanceDict valueForKey:@"text"];
+    
+    self.returnTimeLabel.text = walkingTime;
+    
+    return walkingTime;
 }
 
 
