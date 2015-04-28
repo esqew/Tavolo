@@ -36,6 +36,18 @@
         [prepend appendAttributedString:append];
 
         self.attributedText = prepend;
+    } else if ([self.text isEqualToString:@"TAVOLO RESTAURANT"]) {
+        UIFont *medium = [UIFont fontWithName:@"Roboto-Medium" size:self.font.pointSize];
+        NSDictionary *mediumDict = [NSDictionary dictionaryWithObject:medium forKey:NSFontAttributeName];
+        NSMutableAttributedString *prepend = [[NSMutableAttributedString alloc] initWithString:@"TAVOLO" attributes:mediumDict];
+        
+        UIFont *light = [UIFont fontWithName:@"Roboto-Thin" size:self.font.pointSize];
+        NSDictionary *lightDict = [NSDictionary dictionaryWithObject:light forKey:NSFontAttributeName];
+        NSMutableAttributedString *append = [[NSMutableAttributedString alloc] initWithString:@" RESTAURANT" attributes:lightDict];
+        
+        [prepend appendAttributedString:append];
+        
+        self.attributedText = prepend;
     }
     else {
         self.font = [UIFont fontWithName:@"Roboto-Medium" size:self.font.pointSize];
