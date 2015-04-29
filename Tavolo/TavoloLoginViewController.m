@@ -77,6 +77,11 @@
 }
 
 - (void)logInViewController:(PFLogInViewController *)logInController didLogInUser:(PFUser *)user {
+    [[PFInstallation currentInstallation] setObject:user forKey:@"user"];
+    [[PFInstallation currentInstallation] saveEventually];
+    [PFPush subscribeToChannelInBackground:[[PFUser currentUser] objectForKey:@"type"] block:^(BOOL succeeded, NSError *error) {
+        //
+    }];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

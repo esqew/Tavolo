@@ -22,6 +22,9 @@
 
 - (IBAction)logOut:(id)sender {
     // provide a method to log out from the ib ui
+    [[PFInstallation currentInstallation] setObject:nil forKey:@"user"];
+    [[PFInstallation currentInstallation] saveEventually];
+    [PFPush unsubscribeFromChannelInBackground:[[PFUser currentUser] objectForKey:@"type"]];
     [PFUser logOut];
     if (![PFUser currentUser]) {
         TavoloLoginViewController *loginViewController = [[TavoloLoginViewController alloc] init];
@@ -58,6 +61,7 @@
         TavoloLoginViewController *loginViewController = [[TavoloLoginViewController alloc] init];
         [self presentViewController:loginViewController animated:YES completion:nil];
     } else {
+        // there's a user logged in, hooray!
         PFQuery *query = [PFQuery queryWithClassName:@"Queue"];
         [query whereKey:@"user" equalTo:[PFUser currentUser]];
         [query whereKeyExists:@"venue"];
