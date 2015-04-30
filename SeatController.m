@@ -18,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    //loads initial seated people from backend
     _seatedParties = [[NSMutableArray alloc] init];
     PFQuery *query =[PFQuery queryWithClassName:@"Seated"];
     [query whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
@@ -33,7 +34,7 @@
                   forControlEvents:UIControlEventValueChanged];
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
-    self.tableView.allowsMultipleSelectionDuringEditing = NO;
+    self.tableView.allowsMultipleSelectionDuringEditing = NO; //allows Restaurant the ability to edit cells
 
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -46,7 +47,7 @@
 
 #pragma mark - Table view data source
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 80.0f;
+    return 80.0f; //sets cell size
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
 #warning Potentially incomplete method implementation.
@@ -62,6 +63,7 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //This Function fills the Cell contents based off of Queries it executes
     static NSString * CellIdent = @"seater";
     SeatCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdent forIndexPath:indexPath];
     long row = [indexPath row];
@@ -69,10 +71,13 @@
     
     PFObject *currentObject = [_seatedParties objectAtIndex:row];
     
+    //gets user 
     PFQuery *userQuery = [PFUser query];
     PFUser *user = ((PFUser *)[userQuery getObjectWithId:[[currentObject objectForKey:@"user"] objectId]]);
-    
+    //Gets Name of user
     cell.name.text = [user objectForKey:@"additional"];
+    
+    //formats and displays time in cell
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"hh:mm a"];
     NSString *stringFromDate = [dateFormatter stringFromDate:[currentObject objectForKey:@"EndTime"]];
@@ -81,7 +86,7 @@
     return cell;
 }
 
-- (void)refreshData {
+- (void)refreshData { //function to perform when restaurant client refreshes table
     PFQuery *query =[PFQuery queryWithClassName:@"Seated"];
     [query whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
     [query orderByAscending:@"Size"];
@@ -100,7 +105,9 @@
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    //This deletes the record if the button is clicked
     if (editingStyle == UITableViewCellEditingStyleDelete) {
+        //Block of code removes current person from seated Queue and makes adjustments to both settings and wait time variables to make it accurate
         NSString *table = [NSString stringWithFormat:@"tables%@",[[_seatedParties objectAtIndex:indexPath.row] objectForKey:@"Size"]];
         NSString *counter = [NSString stringWithFormat:@"counter%@",[[_seatedParties objectAtIndex:indexPath.row] objectForKey:@"Size"]];
         NSString *people = [NSString stringWithFormat:@"people%@",[[_seatedParties objectAtIndex:indexPath.row] objectForKey:@"Size"]];

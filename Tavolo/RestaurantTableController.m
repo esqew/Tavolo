@@ -21,12 +21,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    sectionTitles = @[@"2 People", @"3 People", @"4 People", @"5+People"];
+   // sectionTitles = @[@"2 People", @"3 People", @"4 People", @"5+People"];
 
 
-/*    Customer *cust1 = [[Customer alloc] initWithGuestName:@"Niko" partySize:@"2" tableNum:@"-1"  waitTime:@"10" seated:NO];
-    
-    Customer *cust2 = [[Customer alloc] initWithGuestName:@"Alex" partySize:@"2" tableNum:@"-1"  waitTime:@"9" seated:NO];*/
+
     
     _currentParties = [[NSMutableArray alloc] init];
     PFQuery *query =[PFQuery queryWithClassName:@"newQueue"];
@@ -64,13 +62,14 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-
+    //number of rows per section
     return _currentParties.count;
 
 }
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    //This function populates the labels attached to the custom cell based off of queries from database
     static NSString * CellIdent = @"tavoloCell";
     TavoloTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdent forIndexPath:indexPath];
     long row = [indexPath row];
@@ -87,7 +86,7 @@
     return cell;
 }
 
-- (void)refreshData {
+- (void)refreshData { //refreshes table data
     PFQuery *query =[PFQuery queryWithClassName:@"newQueue"];
     [query whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
     [query orderByAscending:@"partySize"];
@@ -106,20 +105,23 @@
 
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
+    if (editingStyle == UITableViewCellEditingStyleDelete) { //This Function of code allows the restaurant to remove cells from the Waiting Queue if and only if there are seats available
  
         PFObject *obj = [_currentParties objectAtIndex:indexPath.row];
         NSString *table = [NSString stringWithFormat:@"tables%@",[[_currentParties objectAtIndex:indexPath.row] objectForKey:@"partySize"]];
         NSString *counter = [NSString stringWithFormat:@"counter%@",[[_currentParties objectAtIndex:indexPath.row] objectForKey:@"partySize"]];
         NSString *people = [NSString stringWithFormat:@"people%@",[[_currentParties objectAtIndex:indexPath.row] objectForKey:@"partySize"]];
+        //Gets Seats available
         PFQuery *settings = [PFQuery queryWithClassName:@"RestaurantSettings"];
         [settings whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
         [settings getFirstObjectInBackgroundWithBlock:^(PFObject *chairs, NSError *error) {
-            if ([[chairs objectForKey:table]integerValue ] > 0)
+            if ([[chairs objectForKey:table]integerValue ] > 0) // If so we can delete from Queue and add to seated Queue
             {
                 
                 chairs[table] = @([[chairs objectForKey:table] integerValue]-1);
                 [chairs saveInBackground];
+                
+                //Query that adjusts statistics to keep wait time accurate
                 PFQuery *q = [PFQuery queryWithClassName:@"Stats"];
                 [q whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
                 [q getFirstObjectInBackgroundWithBlock:^(PFObject *object, NSError *error)
@@ -137,6 +139,7 @@
                     NSDate *end = [[NSDate date] dateByAddingTimeInterval:waitval*60]; //add to the time now
                     seatQueue[@"EndTime"] = end;
                     [seatQueue saveInBackground];
+                    //Removes current selected Cell
                     [[_currentParties objectAtIndex:indexPath.row] deleteInBackground];
                     [_currentParties removeObjectAtIndex:indexPath.row];
                     [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];

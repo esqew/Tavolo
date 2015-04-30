@@ -69,21 +69,26 @@
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
     [query findObjectsInBackgroundWithBlock:^(NSArray *waitObj, NSError *er)
      {
-         if(waitObj.count == 0)
+         if(waitObj.count == 0) //Makes sure you are a registered guest in Queue
          {
              _waitTimeLabel.text = @"0";
          }
          else
          {
              PFObject *obj = [waitObj objectAtIndex:0];
-
+             //Dates to get difference from
              NSDate *start = [obj createdAt];
              NSDate *end = [obj objectForKey:@"seatTime"];
+             
+             //formats dates appropriately
              NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
              [dateFormatter setDateFormat:@"hh:mm a"];
              NSString *stringFromDate = [dateFormatter stringFromDate:[obj objectForKey:@"createdAt"]];
              NSString *stringFromDate2 = [dateFormatter stringFromDate:[obj objectForKey:@"seatTime"]];
+             
              NSLog(@"Date 1: %@ ... Date 2: %@", stringFromDate, stringFromDate2);
+             
+             //Calculates difference and sends it to UI
               NSTimeInterval distanceBetweenDates = [end timeIntervalSinceDate:start];
              double secondsInAMin = 60;
              mins = distanceBetweenDates / secondsInAMin;
@@ -91,7 +96,7 @@
              NSString *minutes = [NSString stringWithFormat:@"%lu", mins];
              _waitTimeLabel.text = minutes;
              
-             //Start timer to update waiting time every minute
+             //Start timer to update waiting time every minute ... cancels timer at 0
              timer = [NSTimer scheduledTimerWithTimeInterval:60.0 target:self selector:@selector(updateWaitTime) userInfo:nil repeats:YES];
          }
      }];
@@ -101,22 +106,25 @@
 - (void)updateWaitTime {
     if(mins == 0)
     {
-        [timer invalidate];
+        [timer invalidate]; // cancels timer
     }
     else
     {
         mins--;
-        NSString *waitTime = [NSString stringWithFormat:@"%lu",mins];
-        _waitTimeLabel.text = waitTime;
+        NSString *waitTime = [NSString stringWithFormat:@"%lu",mins]; //gets remaining time
+        _waitTimeLabel.text = waitTime; //sets timer value on UI
     }
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
-    lastLocation = ((CLLocation *)[locations lastObject]);
-    PFGeoPoint *currentLocationGeoPoint = [PFGeoPoint geoPointWithLocation:lastLocation];
-    if (venueLocation) [self getWalkingTimeFromLocation:currentLocationGeoPoint toLocation:venueLocation];
+    lastLocation = ((CLLocation *)[locations lastObject]); //obtains last location via coordinates
+    PFGeoPoint *currentLocationGeoPoint = [PFGeoPoint geoPointWithLocation:lastLocation]; // current location
+    if (venueLocation) [self getWalkingTimeFromLocation:currentLocationGeoPoint toLocation:venueLocation]; // gets walking distance based on venue
 }
 
+/***********************************
+ leaves Queue when user no longer wishes to wait in this line
+ **********************************/
 - (IBAction)leaveQueue:(id)sender {
     PFQuery *query = [PFQuery queryWithClassName:@"Queue"];
     [query whereKey:@"user" equalTo:[PFUser currentUser]];
@@ -131,16 +139,16 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+// Animation to display specials drop down menu
 - (void)dropMenu {
-    if(specialsShowing)
+    if(specialsShowing) //shows specials
     {
         [_dropDown closeAnimation];
         specialsShowing = NO;
         [specialsButton setImage:downImage];
         
     }
-    else
+    else // close animation
     {
         [_dropDown openAnimation];
         specialsShowing = YES;
@@ -149,10 +157,10 @@
 }
 
 - (IBAction)callPhone:(id)sender {
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://6103372200"]];
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel://6103372200"]]; //Calls CheeseCake factory for now
 }
 
-- (void)drawCircle {
+- (void)drawCircle { // draws wait timer circle
     // Set up the shape of the circle
     int radius = 90;
     CAShapeLayer *circle = [CAShapeLayer layer];

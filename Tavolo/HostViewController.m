@@ -70,11 +70,7 @@
             object[tables] = chairs;
             
             [object saveInBackground];
-            /*******************************************************
-             ****************************************************
-             NEED TO DECREMENT Table Counter For Restaurant HERE
-             NOT COOPERATING
-             **********************************************/
+
             
             //Query to Build End Time
             //So we have to find out when we expect Customer to finish eating by querying Stats
