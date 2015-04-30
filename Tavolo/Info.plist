@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>io.tavolo.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>io.tavolo.client</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -38,6 +38,7 @@
 		<string>armv7</string>
 		<string>gps</string>
 		<string>location-services</string>
+		<string>gamekit</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

@@ -29,6 +29,8 @@
 }
 
 - (IBAction)logOut:(id)sender {
+    [[PFInstallation currentInstallation] setObject:nil forKey:@"user"];
+    [PFPush unsubscribeFromChannelInBackground:[[PFUser currentUser] objectForKey:@"type"]];
     [PFUser logOut];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -52,8 +54,8 @@
     tables = [tables stringByAppendingString:sizeField.text];
     counter = [counter stringByAppendingString:sizeField.text];
     people = [people stringByAppendingString:sizeField.text];
-    NSNumber *num = [NSNumber numberWithInt:[sizeField.text integerValue]];
-    NSNumber *pinNum = [NSNumber numberWithInt:[pinField.text integerValue]];
+    NSNumber *num = [NSNumber numberWithInteger:[sizeField.text integerValue]];
+    NSNumber *pinNum = [NSNumber numberWithInteger:[pinField.text integerValue]];
 
     /* Check Query : so using restaurant objectid and table size find how many available tables*/
     [check whereKey:@"restaurant" equalTo:[PFUser currentUser].objectId];
